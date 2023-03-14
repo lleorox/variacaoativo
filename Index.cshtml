@@ -1,0 +1,56 @@
+@model IEnumerable<VariacaoAtivo.Controllers.AtivosController>
+
+@{
+    Layout = null;
+}
+<script>
+    async function carregarDados(nome) {
+        const response = await fetch(`/ativos/${nome}`);
+        const ativos = await response.json();
+
+        const tbody = document.getElementById('tbody');
+        tbody.innerHTML = '';
+
+        for (const ativo of ativos) {
+            const tr = document.createElement('tr');
+            const dataTd = document.createElement('td');
+            const valorTd = document.createElement('td');
+            const variacaoTd = document.createElement('td');
+
+            dataTd.innerText = ativo.data;
+            valorTd.innerText = ativo.valor;
+            variacaoTd.innerText = ativo.variacao;
+
+            tr.appendChild(dataTd);
+            tr.appendChild(valorTd);
+            tr.appendChild(variacaoTd);
+
+            tbody.appendChild(tr);
+        }
+    }
+
+    carregarDados('PETR4.SA');
+</script>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Variação Percentual</title>
+</head>
+<body>
+    <h1>Ativos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Valor</th>
+                <th>Variação</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+    </table>
+
+</body>
+</html>
