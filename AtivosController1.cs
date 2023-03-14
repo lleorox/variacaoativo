@@ -32,7 +32,7 @@ namespace VariacaoAtivo.Controllers
                 new { Nome = nome });
 
             var ativosList = ativos.ToList();
-
+        // Calcular Variação do Ativo
             for (int i = 0; i < ativosList.Count - 1; i++)
             {
                 ativosList[i].Variacao = ativosList[i].Valor - ativosList[i + 1].Valor;
